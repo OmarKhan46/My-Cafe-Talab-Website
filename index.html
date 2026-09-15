@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cafe Talab | Fast Food, Pizzas, Burgers & Drinks in Vasai</title>
+    <title>Cafe Talab | Fast Food, Pizzas, Burgers & Drinks</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -93,8 +93,103 @@
         .size-price { font-weight: 700; color: var(--primary); font-size: 0.95rem; display: block; }
 
         .section-block { padding: 40px 20px; background: #ffffff; margin-top: 40px; border-radius: 16px; }
-        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 20px; }
-        .contact-card { background: var(--bg-light); padding: 20px; border-radius: 12px; text-align: center; }
+
+        .branches-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .branch-card {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 14px;
+            padding: 25px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .branch-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 2px solid #f2f2f2;
+            padding-bottom: 12px;
+            margin-bottom: 18px;
+        }
+
+        .branch-badge {
+            background: var(--primary);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .branch-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin: 0;
+        }
+
+        .branch-info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+        }
+
+        .branch-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: 0.95rem;
+            color: #444;
+        }
+
+        .branch-info-item i {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-top: 4px;
+            min-width: 20px;
+        }
+
+        .branch-info-item a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .branch-info-item a:hover {
+            color: var(--primary);
+        }
+
+        .branch-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-branch {
+            flex: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        .btn-branch-call { background: var(--primary); color: white; }
+        .btn-branch-wa { background: #25D366; color: white; }
 
         footer { background: #111; color: #aaa; text-align: center; padding: 30px 15px; margin-top: 60px; font-size: 0.9rem; }
         .footer-links a { color: var(--primary); text-decoration: none; margin: 0 10px; font-size: 0.85rem; }
@@ -114,23 +209,23 @@
         <ul class="nav-links">
             <li><a href="#menu">Menu</a></li>
             <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#branches">Branches</a></li>
         </ul>
     </header>
 
     <section class="hero">
         <h1>Welcome to Cafe Talab</h1>
-        <p>Fresh Pizzas, Juicy Burgers, Crispy Momos & Cool Mocktails in Vasai!</p>
+        <p>Fresh Pizzas, Juicy Burgers, Crispy Momos & Cool Mocktails in Vasai & Nallasopara!</p>
         <div class="hero-actions">
-            <a href="tel:9322653045" class="btn-action btn-call"><i class="fas fa-phone-alt"></i> Call Us</a>
-            <a href="https://wa.me/919322653045" target="_blank" class="btn-action btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="tel:9322653045" class="btn-action btn-call"><i class="fas fa-phone-alt"></i> Call Vasai</a>
+            <a href="tel:9185053045" class="btn-action btn-call"><i class="fas fa-phone-alt"></i> Call Nallasopara</a>
         </div>
     </section>
 
     <div class="container" id="menu">
         <div class="section-title">
             <h2>Our Full Menu</h2>
-            <p>Visit us or contact directly for dine-in & parcel inquiries</p>
+            <p>Visit our outlets or call directly for dine-in & takeaway</p>
         </div>
 
         <!-- VEG PIZZAS -->
@@ -414,15 +509,72 @@
 
         <section class="section-block" id="about">
             <div class="section-title"><h2>About Cafe Talab</h2></div>
-            <p style="text-align:center; color:#666; max-width: 700px; margin:auto;">Welcome to Cafe Talab in Vasai. Serving delicious veg & non-veg pizzas, crispy fried momos, gourmet burgers, waffles, and chilling shakes freshly prepared for your cravings.</p>
+            <p style="text-align:center; color:#666; max-width: 700px; margin:auto;">Welcome to Cafe Talab. Serving delicious veg & non-veg pizzas, crispy fried momos, gourmet burgers, waffles, and chilling shakes across Vasai and Nallasopara.</p>
         </section>
 
-        <section class="section-block" id="contact">
-            <div class="section-title"><h2>Contact Us</h2></div>
-            <div class="contact-grid">
-                <div class="contact-card"><h4>Phone</h4><p><a href="tel:9322653045" style="color: inherit; text-decoration:none;">+91 9322653045</a></p></div>
-                <div class="contact-card"><h4>Email</h4><p>cafetalab2023@gmail.com</p></div>
-                <div class="contact-card"><h4>Location</h4><p>Near Sharda School, Navjeevan, Vasai (E)</p></div>
+        <!-- BRANCHES SECTION -->
+        <section class="section-block" id="branches">
+            <div class="section-title">
+                <h2>Our Branches</h2>
+                <p>Visit your nearest Cafe Talab outlet or reach out directly</p>
+            </div>
+
+            <div class="branches-container">
+                <!-- Branch 1: Vasai -->
+                <div class="branch-card">
+                    <div>
+                        <div class="branch-header">
+                            <span class="branch-badge">Branch 1</span>
+                            <h3 class="branch-title">Cafe Talab - Vasai (E)</h3>
+                        </div>
+                        <ul class="branch-info-list">
+                            <li class="branch-info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Near Sharda School, Navjeevan, Vasai East, Maharashtra</span>
+                            </li>
+                            <li class="branch-info-item">
+                                <i class="fas fa-phone-alt"></i>
+                                <a href="tel:9322653045">+91 9322653045</a>
+                            </li>
+                            <li class="branch-info-item">
+                                <i class="fas fa-envelope"></i>
+                                <a href="mailto:cafetalab2023@gmail.com">cafetalab2023@gmail.com</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="branch-actions">
+                        <a href="tel:9322653045" class="btn-branch btn-branch-call"><i class="fas fa-phone"></i> Call Vasai</a>
+                        <a href="https://wa.me/919322653045" target="_blank" class="btn-branch btn-branch-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    </div>
+                </div>
+
+                <!-- Branch 2: Nallasopara -->
+                <div class="branch-card">
+                    <div>
+                        <div class="branch-header">
+                            <span class="branch-badge">Branch 2</span>
+                            <h3 class="branch-title">Cafe Talab - Nallasopara (E)</h3>
+                        </div>
+                        <ul class="branch-info-list">
+                            <li class="branch-info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Shop No. 04, Kanti Avenue, Dmart Road, Opp Capital Mall Gate No. 03, Nallasopara East</span>
+                            </li>
+                            <li class="branch-info-item">
+                                <i class="fas fa-phone-alt"></i>
+                                <a href="tel:9185053045">+91 9185053045</a>
+                            </li>
+                            <li class="branch-info-item">
+                                <i class="fas fa-envelope"></i>
+                                <a href="mailto:cafetalabb2025@gmail.com">cafetalabb2025@gmail.com</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="branch-actions">
+                        <a href="tel:9185053045" class="btn-branch btn-branch-call"><i class="fas fa-phone"></i> Call Nallasopara</a>
+                        <a href="https://wa.me/919185053045" target="_blank" class="btn-branch btn-branch-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
