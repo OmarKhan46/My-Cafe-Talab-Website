@@ -9,13 +9,12 @@
     <style>
         :root {
             --primary: #ff8c00;
-            --primary-dark: #e07b00;
             --secondary: #222;
             --bg-light: #faf8f5;
             --card-bg: #ffffff;
             --text-dark: #2c2c2c;
             --text-muted: #666666;
-            --accent-green: #2a9d8f;
+            --accent-green: #25D366;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -54,7 +53,20 @@
 
         .hero h1 { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--primary); margin-bottom: 10px; }
         .hero p { font-size: 1.1rem; max-width: 600px; margin: 0 auto 20px; color: #ddd; }
-        .delivery-badge { background-color: var(--accent-green); color: white; display: inline-block; padding: 6px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; }
+        
+        .hero-actions { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .btn-call { background: var(--primary); color: white; }
+        .btn-whatsapp { background: var(--accent-green); color: white; }
 
         .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
         .section-title { text-align: center; margin-bottom: 25px; }
@@ -66,116 +78,25 @@
         .menu-card, .pizza-card {
             background: var(--card-bg);
             border-radius: 12px;
-            padding: 16px;
+            padding: 16px 20px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
         .menu-card { display: flex; justify-content: space-between; align-items: center; }
-        .item-name { font-weight: 600; font-size: 0.95rem; }
-        .item-desc { font-size: 0.8rem; color: var(--text-muted); }
-        .price-single { font-weight: 700; color: var(--primary-dark); font-size: 1rem; }
+        .item-name { font-weight: 600; font-size: 1rem; }
+        .price-single { font-weight: 700; color: var(--primary); font-size: 1.05rem; }
 
         .pizza-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .pizza-sizes { display: flex; gap: 8px; justify-content: flex-end; }
-        .size-box { background: #f4f4f4; padding: 5px 8px; border-radius: 8px; text-align: center; }
-        .size-label { font-size: 0.7rem; color: var(--text-muted); display: block; }
-        .size-price { font-weight: 700; color: var(--primary-dark); font-size: 0.85rem; display: block; margin-bottom: 4px; }
-
-        .btn-add {
-            background: var(--primary);
-            border: none;
-            color: #fff;
-            padding: 5px 12px;
-            border-radius: 18px;
-            font-size: 0.78rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .btn-add:active { transform: scale(0.95); }
-
-        .cart-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: #222;
-            color: white;
-            padding: 14px 25px;
-            display: none;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1001;
-            box-shadow: 0 -4px 15px rgba(0,0,0,0.2);
-        }
-
-        .cart-bar-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 9px 22px;
-            border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .cart-modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.6);
-            display: none;
-            justify-content: flex-end;
-            z-index: 2000;
-        }
-
-        .cart-content {
-            background: white;
-            width: 100%;
-            max-width: 440px;
-            height: 100%;
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-        }
-
-        .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 12px; }
-        .cart-items { flex: 1; margin: 20px 0; overflow-y: auto; }
-        .cart-item-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px dashed #eee; padding-bottom: 10px; }
-        .qty-controls { display: flex; gap: 8px; align-items: center; }
-        .qty-btn { width: 26px; height: 26px; border: 1px solid #ccc; background: #eee; border-radius: 4px; cursor: pointer; }
-
-        .checkout-form input, .checkout-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-family: inherit;
-        }
-
-        .btn-pay {
-            background: #5f259f;
-            color: white;
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
-        .btn-pay:disabled { background: #999; cursor: not-allowed; }
+        .pizza-sizes { display: flex; gap: 12px; justify-content: flex-end; }
+        .size-box { background: #f8f8f8; padding: 6px 12px; border-radius: 8px; text-align: center; border: 1px solid #eee; }
+        .size-label { font-size: 0.75rem; color: var(--text-muted); display: block; }
+        .size-price { font-weight: 700; color: var(--primary); font-size: 0.95rem; display: block; }
 
         .section-block { padding: 40px 20px; background: #ffffff; margin-top: 40px; border-radius: 16px; }
         .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 20px; }
         .contact-card { background: var(--bg-light); padding: 20px; border-radius: 12px; text-align: center; }
 
-        footer { background: #111; color: #aaa; text-align: center; padding: 30px 15px 100px; margin-top: 60px; font-size: 0.9rem; }
+        footer { background: #111; color: #aaa; text-align: center; padding: 30px 15px; margin-top: 60px; font-size: 0.9rem; }
         .footer-links a { color: var(--primary); text-decoration: none; margin: 0 10px; font-size: 0.85rem; }
         @media (max-width: 768px) { .nav-links { display: none; } }
     </style>
@@ -200,13 +121,16 @@
     <section class="hero">
         <h1>Welcome to Cafe Talab</h1>
         <p>Fresh Pizzas, Juicy Burgers, Crispy Momos & Cool Mocktails in Vasai!</p>
-        <span class="delivery-badge"><i class="fas fa-motorcycle"></i> FREE DELIVERY ON MIN. ₹200</span>
+        <div class="hero-actions">
+            <a href="tel:9322653045" class="btn-action btn-call"><i class="fas fa-phone-alt"></i> Call Us</a>
+            <a href="https://wa.me/919322653045" target="_blank" class="btn-action btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
     </section>
 
     <div class="container" id="menu">
         <div class="section-title">
             <h2>Our Full Menu</h2>
-            <p>Select your cravings & pay securely online via PhonePe</p>
+            <p>Visit us or contact directly for dine-in & parcel inquiries</p>
         </div>
 
         <!-- VEG PIZZAS -->
@@ -215,81 +139,81 @@
             <div class="pizza-card">
                 <div class="pizza-header"><div class="item-name">Margherita Pizza</div></div>
                 <div class="pizza-sizes">
-                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹120</span><button class="btn-add" onclick="addToCart('Margherita (6&quot;)', 120)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹160</span><button class="btn-add" onclick="addToCart('Margherita (8&quot;)', 160)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹180</span><button class="btn-add" onclick="addToCart('Margherita (10&quot;)', 180)">+ Add</button></div>
+                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹120</span></div>
+                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹160</span></div>
+                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹180</span></div>
                 </div>
             </div>
             <div class="pizza-card">
                 <div class="pizza-header"><div class="item-name">Onion Capsicum</div></div>
                 <div class="pizza-sizes">
-                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹120</span><button class="btn-add" onclick="addToCart('Onion Capsicum (6&quot;)', 120)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹160</span><button class="btn-add" onclick="addToCart('Onion Capsicum (8&quot;)', 160)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹180</span><button class="btn-add" onclick="addToCart('Onion Capsicum (10&quot;)', 180)">+ Add</button></div>
+                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹120</span></div>
+                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹160</span></div>
+                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹180</span></div>
                 </div>
             </div>
             <div class="pizza-card">
                 <div class="pizza-header"><div class="item-name">Golden Corn</div></div>
                 <div class="pizza-sizes">
-                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹120</span><button class="btn-add" onclick="addToCart('Golden Corn (6&quot;)', 120)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹160</span><button class="btn-add" onclick="addToCart('Golden Corn (8&quot;)', 160)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹180</span><button class="btn-add" onclick="addToCart('Golden Corn (10&quot;)', 180)">+ Add</button></div>
+                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹120</span></div>
+                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹160</span></div>
+                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹180</span></div>
                 </div>
             </div>
             <div class="pizza-card">
                 <div class="pizza-header"><div class="item-name">Italian Zaika</div></div>
                 <div class="pizza-sizes">
-                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹140</span><button class="btn-add" onclick="addToCart('Italian Zaika (6&quot;)', 140)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹170</span><button class="btn-add" onclick="addToCart('Italian Zaika (8&quot;)', 170)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹200</span><button class="btn-add" onclick="addToCart('Italian Zaika (10&quot;)', 200)">+ Add</button></div>
+                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹140</span></div>
+                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹170</span></div>
+                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹200</span></div>
                 </div>
             </div>
             <div class="pizza-card">
                 <div class="pizza-header"><div class="item-name">Mexican Delight</div></div>
                 <div class="pizza-sizes">
-                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹140</span><button class="btn-add" onclick="addToCart('Mexican Delight (6&quot;)', 140)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹170</span><button class="btn-add" onclick="addToCart('Mexican Delight (8&quot;)', 170)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹200</span><button class="btn-add" onclick="addToCart('Mexican Delight (10&quot;)', 200)">+ Add</button></div>
+                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹140</span></div>
+                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹170</span></div>
+                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹200</span></div>
                 </div>
             </div>
             <div class="pizza-card">
                 <div class="pizza-header"><div class="item-name">BBQ Paneer Tikka</div></div>
                 <div class="pizza-sizes">
-                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹200</span><button class="btn-add" onclick="addToCart('BBQ Paneer Tikka (6&quot;)', 200)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹220</span><button class="btn-add" onclick="addToCart('BBQ Paneer Tikka (8&quot;)', 220)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹250</span><button class="btn-add" onclick="addToCart('BBQ Paneer Tikka (10&quot;)', 250)">+ Add</button></div>
+                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹200</span></div>
+                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹220</span></div>
+                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹250</span></div>
                 </div>
             </div>
             <div class="pizza-card">
                 <div class="pizza-header"><div class="item-name">Peri Peri Paneer</div></div>
                 <div class="pizza-sizes">
-                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹200</span><button class="btn-add" onclick="addToCart('Peri Peri Paneer (6&quot;)', 200)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹220</span><button class="btn-add" onclick="addToCart('Peri Peri Paneer (8&quot;)', 220)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹250</span><button class="btn-add" onclick="addToCart('Peri Peri Paneer (10&quot;)', 250)">+ Add</button></div>
+                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹200</span></div>
+                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹220</span></div>
+                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹250</span></div>
                 </div>
             </div>
             <div class="pizza-card">
                 <div class="pizza-header"><div class="item-name">Schezwan Paneer</div></div>
                 <div class="pizza-sizes">
-                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹200</span><button class="btn-add" onclick="addToCart('Schezwan Paneer (6&quot;)', 200)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹220</span><button class="btn-add" onclick="addToCart('Schezwan Paneer (8&quot;)', 220)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹250</span><button class="btn-add" onclick="addToCart('Schezwan Paneer (10&quot;)', 250)">+ Add</button></div>
+                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹200</span></div>
+                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹220</span></div>
+                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹250</span></div>
                 </div>
             </div>
             <div class="pizza-card">
                 <div class="pizza-header"><div class="item-name">Loaded Cheese</div></div>
                 <div class="pizza-sizes">
-                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹200</span><button class="btn-add" onclick="addToCart('Loaded Cheese (6&quot;)', 200)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹220</span><button class="btn-add" onclick="addToCart('Loaded Cheese (8&quot;)', 220)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹250</span><button class="btn-add" onclick="addToCart('Loaded Cheese (10&quot;)', 250)">+ Add</button></div>
+                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹200</span></div>
+                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹220</span></div>
+                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹250</span></div>
                 </div>
             </div>
             <div class="pizza-card">
                 <div class="pizza-header"><div class="item-name">Talab Special Veg Pizza</div></div>
                 <div class="pizza-sizes">
-                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹200</span><button class="btn-add" onclick="addToCart('Talab Special Veg (6&quot;)', 200)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹220</span><button class="btn-add" onclick="addToCart('Talab Special Veg (8&quot;)', 220)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹250</span><button class="btn-add" onclick="addToCart('Talab Special Veg (10&quot;)', 250)">+ Add</button></div>
+                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹200</span></div>
+                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹220</span></div>
+                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹250</span></div>
                 </div>
             </div>
         </div>
@@ -300,192 +224,192 @@
             <div class="pizza-card">
                 <div class="pizza-header"><div class="item-name">Chicken Pizza</div></div>
                 <div class="pizza-sizes">
-                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹150</span><button class="btn-add" onclick="addToCart('Chicken Pizza (6&quot;)', 150)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹170</span><button class="btn-add" onclick="addToCart('Chicken Pizza (8&quot;)', 170)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹210</span><button class="btn-add" onclick="addToCart('Chicken Pizza (10&quot;)', 210)">+ Add</button></div>
+                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹150</span></div>
+                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹170</span></div>
+                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹210</span></div>
                 </div>
             </div>
             <div class="pizza-card">
                 <div class="pizza-header"><div class="item-name">Cheese Chicken Pizza</div></div>
                 <div class="pizza-sizes">
-                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹170</span><button class="btn-add" onclick="addToCart('Cheese Chicken Pizza (6&quot;)', 170)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹200</span><button class="btn-add" onclick="addToCart('Cheese Chicken Pizza (8&quot;)', 200)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹220</span><button class="btn-add" onclick="addToCart('Cheese Chicken Pizza (10&quot;)', 220)">+ Add</button></div>
+                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹170</span></div>
+                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹200</span></div>
+                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹220</span></div>
                 </div>
             </div>
             <div class="pizza-card">
                 <div class="pizza-header"><div class="item-name">Chicken Peri Peri</div></div>
                 <div class="pizza-sizes">
-                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹180</span><button class="btn-add" onclick="addToCart('Chicken Peri Peri Pizza (6&quot;)', 180)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹220</span><button class="btn-add" onclick="addToCart('Chicken Peri Peri Pizza (8&quot;)', 220)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹250</span><button class="btn-add" onclick="addToCart('Chicken Peri Peri Pizza (10&quot;)', 250)">+ Add</button></div>
+                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹180</span></div>
+                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹220</span></div>
+                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹250</span></div>
                 </div>
             </div>
             <div class="pizza-card">
                 <div class="pizza-header"><div class="item-name">Mexican Chicken</div></div>
                 <div class="pizza-sizes">
-                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹180</span><button class="btn-add" onclick="addToCart('Mexican Chicken Pizza (6&quot;)', 180)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹220</span><button class="btn-add" onclick="addToCart('Mexican Chicken Pizza (8&quot;)', 220)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹250</span><button class="btn-add" onclick="addToCart('Mexican Chicken Pizza (10&quot;)', 250)">+ Add</button></div>
+                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹180</span></div>
+                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹220</span></div>
+                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹250</span></div>
                 </div>
             </div>
             <div class="pizza-card">
                 <div class="pizza-header"><div class="item-name">Barbeque Chicken</div></div>
                 <div class="pizza-sizes">
-                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹180</span><button class="btn-add" onclick="addToCart('Barbeque Chicken Pizza (6&quot;)', 180)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹220</span><button class="btn-add" onclick="addToCart('Barbeque Chicken Pizza (8&quot;)', 220)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹250</span><button class="btn-add" onclick="addToCart('Barbeque Chicken Pizza (10&quot;)', 250)">+ Add</button></div>
+                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹180</span></div>
+                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹220</span></div>
+                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹250</span></div>
                 </div>
             </div>
             <div class="pizza-card">
                 <div class="pizza-header"><div class="item-name">Tandoori Chicken</div></div>
                 <div class="pizza-sizes">
-                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹200</span><button class="btn-add" onclick="addToCart('Tandoori Chicken Pizza (6&quot;)', 200)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹240</span><button class="btn-add" onclick="addToCart('Tandoori Chicken Pizza (8&quot;)', 240)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹270</span><button class="btn-add" onclick="addToCart('Tandoori Chicken Pizza (10&quot;)', 270)">+ Add</button></div>
+                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹200</span></div>
+                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹240</span></div>
+                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹270</span></div>
                 </div>
             </div>
             <div class="pizza-card">
                 <div class="pizza-header"><div class="item-name">Cheese Overloaded Chicken</div></div>
                 <div class="pizza-sizes">
-                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹210</span><button class="btn-add" onclick="addToCart('Cheese Overloaded Chicken (6&quot;)', 210)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹250</span><button class="btn-add" onclick="addToCart('Cheese Overloaded Chicken (8&quot;)', 250)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹270</span><button class="btn-add" onclick="addToCart('Cheese Overloaded Chicken (10&quot;)', 270)">+ Add</button></div>
+                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹210</span></div>
+                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹250</span></div>
+                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹270</span></div>
                 </div>
             </div>
             <div class="pizza-card">
                 <div class="pizza-header"><div class="item-name">Chef's Special Chicken Pizza</div></div>
                 <div class="pizza-sizes">
-                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹220</span><button class="btn-add" onclick="addToCart('Chefs Special Chicken (6&quot;)', 220)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹270</span><button class="btn-add" onclick="addToCart('Chefs Special Chicken (8&quot;)', 270)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹300</span><button class="btn-add" onclick="addToCart('Chefs Special Chicken (10&quot;)', 300)">+ Add</button></div>
+                    <div class="size-box"><span class="size-label">6"</span><span class="size-price">₹220</span></div>
+                    <div class="size-box"><span class="size-label">8"</span><span class="size-price">₹270</span></div>
+                    <div class="size-box"><span class="size-label">10"</span><span class="size-price">₹300</span></div>
                 </div>
             </div>
         </div>
 
         <!-- BURGERS -->
-        <h2 class="cat-title">🍔 Burgers (Veg & Non-Veg)</h2>
+        <h2 class="cat-title">🍔 Burgers</h2>
         <div class="grid-3">
-            <div class="menu-card"><div><div class="item-name">Veg Burger</div><div class="price-single">₹90</div></div><button class="btn-add" onclick="addToCart('Veg Burger', 90)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Peri Peri Veg Burger</div><div class="price-single">₹120</div></div><button class="btn-add" onclick="addToCart('Peri Peri Veg Burger', 120)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Tandoori Veg Burger</div><div class="price-single">₹120</div></div><button class="btn-add" onclick="addToCart('Tandoori Veg Burger', 120)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Cheese Burger</div><div class="price-single">₹120</div></div><button class="btn-add" onclick="addToCart('Cheese Burger', 120)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Double Cheese Burger (Veg)</div><div class="price-single">₹140</div></div><button class="btn-add" onclick="addToCart('Double Cheese Veg Burger', 140)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Double Patty Veg Burger</div><div class="price-single">₹180</div></div><button class="btn-add" onclick="addToCart('Double Patty Veg Burger', 180)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Chicken Burger</div><div class="price-single">₹100</div></div><button class="btn-add" onclick="addToCart('Chicken Burger', 100)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Chicken Peri Peri Burger</div><div class="price-single">₹120</div></div><button class="btn-add" onclick="addToCart('Chicken Peri Peri Burger', 120)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Chicken Schezwan Burger</div><div class="price-single">₹120</div></div><button class="btn-add" onclick="addToCart('Chicken Schezwan Burger', 120)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Double Cheese Chicken Burger</div><div class="price-single">₹130</div></div><button class="btn-add" onclick="addToCart('Double Cheese Chicken Burger', 130)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Chicken Tandoori Burger</div><div class="price-single">₹140</div></div><button class="btn-add" onclick="addToCart('Chicken Tandoori Burger', 140)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Crispy Chicken Burger</div><div class="price-single">₹170</div></div><button class="btn-add" onclick="addToCart('Crispy Chicken Burger', 170)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Mighty Chicken Burger</div><div class="price-single">₹250</div></div><button class="btn-add" onclick="addToCart('Mighty Chicken Burger', 250)">+ Add</button></div>
+            <div class="menu-card"><div><div class="item-name">Veg Burger</div></div><div class="price-single">₹90</div></div>
+            <div class="menu-card"><div><div class="item-name">Peri Peri Veg Burger</div></div><div class="price-single">₹120</div></div>
+            <div class="menu-card"><div><div class="item-name">Tandoori Veg Burger</div></div><div class="price-single">₹120</div></div>
+            <div class="menu-card"><div><div class="item-name">Cheese Burger</div></div><div class="price-single">₹120</div></div>
+            <div class="menu-card"><div><div class="item-name">Double Cheese Burger (Veg)</div></div><div class="price-single">₹140</div></div>
+            <div class="menu-card"><div><div class="item-name">Double Patty Veg Burger</div></div><div class="price-single">₹180</div></div>
+            <div class="menu-card"><div><div class="item-name">Chicken Burger</div></div><div class="price-single">₹100</div></div>
+            <div class="menu-card"><div><div class="item-name">Chicken Peri Peri Burger</div></div><div class="price-single">₹120</div></div>
+            <div class="menu-card"><div><div class="item-name">Chicken Schezwan Burger</div></div><div class="price-single">₹120</div></div>
+            <div class="menu-card"><div><div class="item-name">Double Cheese Chicken Burger</div></div><div class="price-single">₹130</div></div>
+            <div class="menu-card"><div><div class="item-name">Chicken Tandoori Burger</div></div><div class="price-single">₹140</div></div>
+            <div class="menu-card"><div><div class="item-name">Crispy Chicken Burger</div></div><div class="price-single">₹170</div></div>
+            <div class="menu-card"><div><div class="item-name">Mighty Chicken Burger</div></div><div class="price-single">₹250</div></div>
         </div>
 
         <!-- FRIED MOMOS -->
         <h2 class="cat-title">🥟 Fried Momos (6 Pcs)</h2>
         <div class="grid-3">
-            <div class="menu-card"><div><div class="item-name">Veg Momos</div><div class="price-single">₹140</div></div><button class="btn-add" onclick="addToCart('Veg Momos (6 pcs)', 140)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Paneer Peri Peri Momos</div><div class="price-single">₹150</div></div><button class="btn-add" onclick="addToCart('Paneer Peri Peri Momos (6 pcs)', 150)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Paneer Tikka Momos</div><div class="price-single">₹160</div></div><button class="btn-add" onclick="addToCart('Paneer Tikka Momos (6 pcs)', 160)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Chicken Momos</div><div class="price-single">₹140</div></div><button class="btn-add" onclick="addToCart('Chicken Momos (6 pcs)', 140)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Chicken Peri Peri Momos</div><div class="price-single">₹150</div></div><button class="btn-add" onclick="addToCart('Chicken Peri Peri Momos (6 pcs)', 150)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Chicken Tikka Momos</div><div class="price-single">₹160</div></div><button class="btn-add" onclick="addToCart('Chicken Tikka Momos (6 pcs)', 160)">+ Add</button></div>
+            <div class="menu-card"><div><div class="item-name">Veg Momos</div></div><div class="price-single">₹140</div></div>
+            <div class="menu-card"><div><div class="item-name">Paneer Peri Peri Momos</div></div><div class="price-single">₹150</div></div>
+            <div class="menu-card"><div><div class="item-name">Paneer Tikka Momos</div></div><div class="price-single">₹160</div></div>
+            <div class="menu-card"><div><div class="item-name">Chicken Momos</div></div><div class="price-single">₹140</div></div>
+            <div class="menu-card"><div><div class="item-name">Chicken Peri Peri Momos</div></div><div class="price-single">₹150</div></div>
+            <div class="menu-card"><div><div class="item-name">Chicken Tikka Momos</div></div><div class="price-single">₹160</div></div>
         </div>
 
         <!-- SANDWICHES -->
         <h2 class="cat-title">🥪 Sandwiches</h2>
         <div class="grid-3">
-            <div class="menu-card"><div><div class="item-name">Veg Sandwich</div><div class="price-single">₹100</div></div><button class="btn-add" onclick="addToCart('Veg Sandwich', 100)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Toast Sandwich</div><div class="price-single">₹120</div></div><button class="btn-add" onclick="addToCart('Toast Sandwich', 120)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Masala Sandwich</div><div class="price-single">₹120</div></div><button class="btn-add" onclick="addToCart('Masala Sandwich', 120)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Paneer Sandwich</div><div class="price-single">₹170</div></div><button class="btn-add" onclick="addToCart('Paneer Sandwich', 170)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Chicken Sandwich</div><div class="price-single">₹140</div></div><button class="btn-add" onclick="addToCart('Chicken Sandwich', 140)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Spicy Chicken Sandwich</div><div class="price-single">₹170</div></div><button class="btn-add" onclick="addToCart('Spicy Chicken Sandwich', 170)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Chicken Cheese Sandwich</div><div class="price-single">₹190</div></div><button class="btn-add" onclick="addToCart('Chicken Cheese Sandwich', 190)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Chicken Club Sandwich</div><div class="price-single">₹220</div></div><button class="btn-add" onclick="addToCart('Chicken Club Sandwich', 220)">+ Add</button></div>
+            <div class="menu-card"><div><div class="item-name">Veg Sandwich</div></div><div class="price-single">₹100</div></div>
+            <div class="menu-card"><div><div class="item-name">Toast Sandwich</div></div><div class="price-single">₹120</div></div>
+            <div class="menu-card"><div><div class="item-name">Masala Sandwich</div></div><div class="price-single">₹120</div></div>
+            <div class="menu-card"><div><div class="item-name">Paneer Sandwich</div></div><div class="price-single">₹170</div></div>
+            <div class="menu-card"><div><div class="item-name">Chicken Sandwich</div></div><div class="price-single">₹140</div></div>
+            <div class="menu-card"><div><div class="item-name">Spicy Chicken Sandwich</div></div><div class="price-single">₹170</div></div>
+            <div class="menu-card"><div><div class="item-name">Chicken Cheese Sandwich</div></div><div class="price-single">₹190</div></div>
+            <div class="menu-card"><div><div class="item-name">Chicken Club Sandwich</div></div><div class="price-single">₹220</div></div>
         </div>
 
-        <!-- APPETIZERS & FRIES -->
+        <!-- FRIES & APPETIZERS -->
         <h2 class="cat-title">🍟 Fries & Appetizers</h2>
         <div class="grid-2">
             <div class="pizza-card">
                 <div class="pizza-header"><div class="item-name">Classic Fries</div></div>
                 <div class="pizza-sizes">
-                    <div class="size-box"><span class="size-label">Regular</span><span class="size-price">₹80</span><button class="btn-add" onclick="addToCart('Classic Fries (Regular)', 80)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">Large</span><span class="size-price">₹120</span><button class="btn-add" onclick="addToCart('Classic Fries (Large)', 120)">+ Add</button></div>
+                    <div class="size-box"><span class="size-label">Regular</span><span class="size-price">₹80</span></div>
+                    <div class="size-box"><span class="size-label">Large</span><span class="size-price">₹120</span></div>
                 </div>
             </div>
             <div class="pizza-card">
                 <div class="pizza-header"><div class="item-name">Peri Peri Fries</div></div>
                 <div class="pizza-sizes">
-                    <div class="size-box"><span class="size-label">Regular</span><span class="size-price">₹90</span><button class="btn-add" onclick="addToCart('Peri Peri Fries (Regular)', 90)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">Large</span><span class="size-price">₹130</span><button class="btn-add" onclick="addToCart('Peri Peri Fries (Large)', 130)">+ Add</button></div>
+                    <div class="size-box"><span class="size-label">Regular</span><span class="size-price">₹90</span></div>
+                    <div class="size-box"><span class="size-label">Large</span><span class="size-price">₹130</span></div>
                 </div>
             </div>
             <div class="pizza-card">
                 <div class="pizza-header"><div class="item-name">Schezwan Mayo Fries</div></div>
                 <div class="pizza-sizes">
-                    <div class="size-box"><span class="size-label">Regular</span><span class="size-price">₹100</span><button class="btn-add" onclick="addToCart('Schezwan Mayo Fries (Regular)', 100)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">Large</span><span class="size-price">₹140</span><button class="btn-add" onclick="addToCart('Schezwan Mayo Fries (Large)', 140)">+ Add</button></div>
+                    <div class="size-box"><span class="size-label">Regular</span><span class="size-price">₹100</span></div>
+                    <div class="size-box"><span class="size-label">Large</span><span class="size-price">₹140</span></div>
                 </div>
             </div>
             <div class="pizza-card">
                 <div class="pizza-header"><div class="item-name">Mayo Chilli Fries</div></div>
                 <div class="pizza-sizes">
-                    <div class="size-box"><span class="size-label">Regular</span><span class="size-price">₹100</span><button class="btn-add" onclick="addToCart('Mayo Chilli Fries (Regular)', 100)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">Large</span><span class="size-price">₹140</span><button class="btn-add" onclick="addToCart('Mayo Chilli Fries (Large)', 140)">+ Add</button></div>
+                    <div class="size-box"><span class="size-label">Regular</span><span class="size-price">₹100</span></div>
+                    <div class="size-box"><span class="size-label">Large</span><span class="size-price">₹140</span></div>
                 </div>
             </div>
             <div class="pizza-card">
                 <div class="pizza-header"><div class="item-name">Tandoori Dip Fries</div></div>
                 <div class="pizza-sizes">
-                    <div class="size-box"><span class="size-label">Regular</span><span class="size-price">₹110</span><button class="btn-add" onclick="addToCart('Tandoori Dip Fries (Regular)', 110)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">Large</span><span class="size-price">₹150</span><button class="btn-add" onclick="addToCart('Tandoori Dip Fries (Large)', 150)">+ Add</button></div>
+                    <div class="size-box"><span class="size-label">Regular</span><span class="size-price">₹110</span></div>
+                    <div class="size-box"><span class="size-label">Large</span><span class="size-price">₹150</span></div>
                 </div>
             </div>
             <div class="pizza-card">
                 <div class="pizza-header"><div class="item-name">Loaded Cheese Fries</div></div>
                 <div class="pizza-sizes">
-                    <div class="size-box"><span class="size-label">Regular</span><span class="size-price">₹120</span><button class="btn-add" onclick="addToCart('Loaded Cheese Fries (Regular)', 120)">+ Add</button></div>
-                    <div class="size-box"><span class="size-label">Large</span><span class="size-price">₹170</span><button class="btn-add" onclick="addToCart('Loaded Cheese Fries (Large)', 170)">+ Add</button></div>
+                    <div class="size-box"><span class="size-label">Regular</span><span class="size-price">₹120</span></div>
+                    <div class="size-box"><span class="size-label">Large</span><span class="size-price">₹170</span></div>
                 </div>
             </div>
         </div>
 
         <div class="grid-3" style="margin-top: 15px;">
-            <div class="menu-card"><div><div class="item-name">Chicken KFC (5 pcs)</div><div class="price-single">₹170</div></div><button class="btn-add" onclick="addToCart('Chicken KFC (5 pcs)', 170)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Peri Peri Chicken (5 pcs)</div><div class="price-single">₹190</div></div><button class="btn-add" onclick="addToCart('Peri Peri Chicken (5 pcs)', 190)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Chicken Popcorn (8 pcs)</div><div class="price-single">₹140</div></div><button class="btn-add" onclick="addToCart('Chicken Popcorn (8 pcs)', 140)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Chicken Popcorn (15 pcs)</div><div class="price-single">₹240</div></div><button class="btn-add" onclick="addToCart('Chicken Popcorn (15 pcs)', 240)">+ Add</button></div>
+            <div class="menu-card"><div><div class="item-name">Chicken KFC (5 pcs)</div></div><div class="price-single">₹170</div></div>
+            <div class="menu-card"><div><div class="item-name">Peri Peri Chicken (5 pcs)</div></div><div class="price-single">₹190</div></div>
+            <div class="menu-card"><div><div class="item-name">Chicken Popcorn (8 pcs)</div></div><div class="price-single">₹140</div></div>
+            <div class="menu-card"><div><div class="item-name">Chicken Popcorn (15 pcs)</div></div><div class="price-single">₹240</div></div>
         </div>
 
         <!-- GARLIC BREAD & WAFFLES -->
         <h2 class="cat-title">🥖 Garlic Bread & 🧇 Waffles</h2>
         <div class="grid-3">
-            <div class="menu-card"><div><div class="item-name">Classic Garlic Bread</div><div class="price-single">₹90</div></div><button class="btn-add" onclick="addToCart('Classic Garlic Bread', 90)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Peri Peri Garlic Bread</div><div class="price-single">₹100</div></div><button class="btn-add" onclick="addToCart('Peri Peri Garlic Bread', 100)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Cheese Exotic Garlic Bread</div><div class="price-single">₹119</div></div><button class="btn-add" onclick="addToCart('Cheese Exotic Garlic Bread', 119)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Pizza Style Garlic Bread</div><div class="price-single">₹119</div></div><button class="btn-add" onclick="addToCart('Pizza Style Garlic Bread', 119)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Chocolate Waffle</div><div class="price-single">₹120</div></div><button class="btn-add" onclick="addToCart('Chocolate Waffle', 120)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Dark Chocolate Waffle</div><div class="price-single">₹140</div></div><button class="btn-add" onclick="addToCart('Dark Chocolate Waffle', 140)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Naughty Nutella Waffle</div><div class="price-single">₹140</div></div><button class="btn-add" onclick="addToCart('Naughty Nutella Waffle', 140)">+ Add</button></div>
+            <div class="menu-card"><div><div class="item-name">Classic Garlic Bread</div></div><div class="price-single">₹90</div></div>
+            <div class="menu-card"><div><div class="item-name">Peri Peri Garlic Bread</div></div><div class="price-single">₹100</div></div>
+            <div class="menu-card"><div><div class="item-name">Cheese Exotic Garlic Bread</div></div><div class="price-single">₹119</div></div>
+            <div class="menu-card"><div><div class="item-name">Pizza Style Garlic Bread</div></div><div class="price-single">₹119</div></div>
+            <div class="menu-card"><div><div class="item-name">Chocolate Waffle</div></div><div class="price-single">₹120</div></div>
+            <div class="menu-card"><div><div class="item-name">Dark Chocolate Waffle</div></div><div class="price-single">₹140</div></div>
+            <div class="menu-card"><div><div class="item-name">Naughty Nutella Waffle</div></div><div class="price-single">₹140</div></div>
         </div>
 
-        <!-- BEVERAGES: MOCKTAILS & SHAKES -->
+        <!-- BEVERAGES -->
         <h2 class="cat-title">🥤 Mocktails & Milkshakes</h2>
         <div class="grid-3">
-            <div class="menu-card"><div><div class="item-name">Cold Coffee</div><div class="price-single">₹100</div></div><button class="btn-add" onclick="addToCart('Cold Coffee', 100)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Chocolate Shake</div><div class="price-single">₹120</div></div><button class="btn-add" onclick="addToCart('Chocolate Shake', 120)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Strawberry Shake</div><div class="price-single">₹130</div></div><button class="btn-add" onclick="addToCart('Strawberry Shake', 130)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Blueberry Shake</div><div class="price-single">₹140</div></div><button class="btn-add" onclick="addToCart('Blueberry Shake', 140)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Black Currant Shake</div><div class="price-single">₹150</div></div><button class="btn-add" onclick="addToCart('Black Currant Shake', 150)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Strawberry Mocktail</div><div class="price-single">₹110</div></div><button class="btn-add" onclick="addToCart('Strawberry Mocktail', 110)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Mint Mojito</div><div class="price-single">₹110</div></div><button class="btn-add" onclick="addToCart('Mint Mojito', 110)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Orange Mocktail</div><div class="price-single">₹119</div></div><button class="btn-add" onclick="addToCart('Orange Mocktail', 119)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Blueberry Mocktail</div><div class="price-single">₹119</div></div><button class="btn-add" onclick="addToCart('Blueberry Mocktail', 119)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Blue Lagoon Mocktail</div><div class="price-single">₹120</div></div><button class="btn-add" onclick="addToCart('Blue Lagoon Mocktail', 120)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Peach Mocktail</div><div class="price-single">₹130</div></div><button class="btn-add" onclick="addToCart('Peach Mocktail', 130)">+ Add</button></div>
-            <div class="menu-card"><div><div class="item-name">Green Apple Mocktail</div><div class="price-single">₹130</div></div><button class="btn-add" onclick="addToCart('Green Apple Mocktail', 130)">+ Add</button></div>
+            <div class="menu-card"><div><div class="item-name">Cold Coffee</div></div><div class="price-single">₹100</div></div>
+            <div class="menu-card"><div><div class="item-name">Chocolate Shake</div></div><div class="price-single">₹120</div></div>
+            <div class="menu-card"><div><div class="item-name">Strawberry Shake</div></div><div class="price-single">₹130</div></div>
+            <div class="menu-card"><div><div class="item-name">Blueberry Shake</div></div><div class="price-single">₹140</div></div>
+            <div class="menu-card"><div><div class="item-name">Black Currant Shake</div></div><div class="price-single">₹150</div></div>
+            <div class="menu-card"><div><div class="item-name">Strawberry Mocktail</div></div><div class="price-single">₹110</div></div>
+            <div class="menu-card"><div><div class="item-name">Mint Mojito</div></div><div class="price-single">₹110</div></div>
+            <div class="menu-card"><div><div class="item-name">Orange Mocktail</div></div><div class="price-single">₹119</div></div>
+            <div class="menu-card"><div><div class="item-name">Blueberry Mocktail</div></div><div class="price-single">₹119</div></div>
+            <div class="menu-card"><div><div class="item-name">Blue Lagoon Mocktail</div></div><div class="price-single">₹120</div></div>
+            <div class="menu-card"><div><div class="item-name">Peach Mocktail</div></div><div class="price-single">₹130</div></div>
+            <div class="menu-card"><div><div class="item-name">Green Apple Mocktail</div></div><div class="price-single">₹130</div></div>
         </div>
 
         <section class="section-block" id="about">
@@ -498,47 +422,9 @@
             <div class="contact-grid">
                 <div class="contact-card"><h4>Phone</h4><p><a href="tel:9322653045" style="color: inherit; text-decoration:none;">+91 9322653045</a></p></div>
                 <div class="contact-card"><h4>Email</h4><p>cafetalab2023@gmail.com</p></div>
-                <div class="contact-card"><h4>Location</h4><p>Shanti Nagar, Navjeevan, Vasai (E)</p></div>
+                <div class="contact-card"><h4>Location</h4><p>Near Sharda School, Navjeevan, Vasai (E)</p></div>
             </div>
         </section>
-    </div>
-
-    <!-- Floating Sticky Cart Bar -->
-    <div class="cart-bar" id="cartBar">
-        <div>
-            <span id="cartCount">0 items</span> | <strong id="cartTotal">₹0</strong>
-        </div>
-        <button class="cart-bar-btn" onclick="openCart()"><i class="fas fa-shopping-bag"></i> View Cart</button>
-    </div>
-
-    <!-- Slide-out Cart Drawer -->
-    <div class="cart-modal" id="cartModal">
-        <div class="cart-content">
-            <div class="cart-header">
-                <h3>Your Cart</h3>
-                <button onclick="closeCart()" style="background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
-            </div>
-
-            <div class="cart-items" id="cartItemsContainer"></div>
-
-            <div style="border-top:1px solid #eee; padding-top:15px; margin-bottom:15px;">
-                <div style="display:flex; justify-content:space-between; font-weight:700; font-size:1.1rem; margin-bottom:15px;">
-                    <span>Total Amount:</span>
-                    <span id="modalTotal">₹0</span>
-                </div>
-
-                <div class="checkout-form">
-                    <input type="text" id="custName" placeholder="Your Name" required>
-                    <input type="tel" id="custPhone" placeholder="Mobile Number (10 digits)" required>
-                    <textarea id="custAddress" placeholder="Delivery Address in Vasai" rows="2" required></textarea>
-                </div>
-
-                <button class="btn-pay" id="payBtn" onclick="initiatePhonePe()">
-                    <i class="fas fa-lock"></i> Pay via PhonePe
-                </button>
-                <div id="statusMsg" style="color: red; font-size: 0.85rem; text-align: center; margin-top: 10px; word-break: break-all;"></div>
-            </div>
-        </div>
     </div>
 
     <footer>
@@ -549,127 +435,5 @@
         </div>
     </footer>
 
-    <script>
-        let cart = [];
-        const BACKEND_URL = "https://phonepe-backend-orpin.vercel.app/api/pay";
-
-        function addToCart(name, price) {
-            const existing = cart.find(i => i.name === name);
-            if (existing) {
-                existing.qty += 1;
-            } else {
-                cart.push({ name: name, price: Number(price), qty: 1 });
-            }
-            updateCartUI();
-        }
-
-        function changeQty(index, delta) {
-            cart[index].qty += delta;
-            if (cart[index].qty <= 0) {
-                cart.splice(index, 1);
-            }
-            updateCartUI();
-        }
-
-        function updateCartUI() {
-            const cartBar = document.getElementById('cartBar');
-            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-
-            if (totalQty > 0) {
-                cartBar.style.display = 'flex';
-                document.getElementById('cartCount').innerText = totalQty + " items";
-                document.getElementById('cartTotal').innerText = "₹" + totalPrice;
-            } else {
-                cartBar.style.display = 'none';
-                closeCart();
-            }
-
-            const container = document.getElementById('cartItemsContainer');
-            if (cart.length === 0) {
-                container.innerHTML = '<p style="text-align:center; color:#888; margin-top:20px;">Your cart is empty</p>';
-            } else {
-                let html = '';
-                cart.forEach((item, index) => {
-                    html += `
-                        <div class="cart-item-row">
-                            <div>
-                                <div style="font-weight:600;">${item.name}</div>
-                                <div style="font-size:0.85rem; color:#888;">₹${item.price} each</div>
-                            </div>
-                            <div class="qty-controls">
-                                <button class="qty-btn" onclick="changeQty(${index}, -1)">-</button>
-                                <span>${item.qty}</span>
-                                <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
-                                <span style="margin-left:10px; font-weight:600;">₹${item.price * item.qty}</span>
-                            </div>
-                        </div>
-                    `;
-                });
-                container.innerHTML = html;
-            }
-            document.getElementById('modalTotal').innerText = "₹" + totalPrice;
-        }
-
-        function openCart() {
-            document.getElementById('cartModal').style.display = 'flex';
-        }
-
-        function closeCart() {
-            document.getElementById('cartModal').style.display = 'none';
-        }
-
-        async function initiatePhonePe() {
-            const name = document.getElementById('custName').value.trim();
-            const phone = document.getElementById('custPhone').value.trim();
-            const address = document.getElementById('custAddress').value.trim();
-            const statusMsg = document.getElementById('statusMsg');
-            const payBtn = document.getElementById('payBtn');
-
-            if (!name || phone.length < 10 || !address) {
-                statusMsg.innerText = "Please fill your Name, 10-digit Phone, and Address.";
-                return;
-            }
-
-            const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            if (totalAmount < 1) {
-                statusMsg.innerText = "Please add items to cart.";
-                return;
-            }
-
-            payBtn.disabled = true;
-            payBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-            statusMsg.innerText = "";
-
-            try {
-                const response = await fetch(BACKEND_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        amount: totalAmount,
-                        customerName: name,
-                        customerPhone: phone,
-                        address: address,
-                        items: cart
-                    })
-                });
-
-                const result = await response.json();
-
-                if (response.ok && result.url) {
-                    window.location.href = result.url;
-                } else {
-                    const printMsg = typeof result.message === 'object' ? JSON.stringify(result.message) : (result.message || 'Payment initiation failed');
-                    statusMsg.innerText = printMsg;
-                    payBtn.disabled = false;
-                    payBtn.innerHTML = '<i class="fas fa-lock"></i> Pay via PhonePe';
-                }
-            } catch (err) {
-                statusMsg.innerText = "Connection error with payment server: " + err.message;
-                payBtn.disabled = false;
-                payBtn.innerHTML = '<i class="fas fa-lock"></i> Pay via PhonePe';
-            }
-        }
-    </script>
 </body>
 </html>
