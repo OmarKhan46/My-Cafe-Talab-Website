@@ -15,6 +15,7 @@
             --text-dark: #2c2c2c;
             --text-muted: #666666;
             --accent-green: #25D366;
+            --playstore-dark: #01875f;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -38,9 +39,26 @@
         .logo-img { max-height: 50px; width: auto; border-radius: 6px; }
         .logo-text { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 800; color: var(--primary); letter-spacing: 1px; }
         .tagline-sub { font-size: 0.75rem; color: #aaa; display: block; margin-top: -5px; }
-        .nav-links { display: flex; gap: 20px; list-style: none; }
+        .nav-links { display: flex; gap: 20px; list-style: none; align-items: center; }
         .nav-links a { color: #fff; text-decoration: none; font-weight: 500; }
         .nav-links a:hover { color: var(--primary); }
+
+        .nav-app-btn {
+            background: #2a2a2a;
+            border: 1px solid #444;
+            padding: 6px 14px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: #fff !important;
+            transition: 0.2s;
+        }
+        .nav-app-btn:hover {
+            background: var(--playstore-dark);
+            border-color: var(--playstore-dark);
+        }
 
         .hero {
             background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80');
@@ -54,7 +72,7 @@
         .hero h1 { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--primary); margin-bottom: 10px; }
         .hero p { font-size: 1.1rem; max-width: 600px; margin: 0 auto 20px; color: #ddd; }
         
-        .hero-actions { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 25px; }
         .btn-action {
             display: inline-flex;
             align-items: center;
@@ -67,6 +85,30 @@
         }
         .btn-call { background: var(--primary); color: white; }
         .btn-whatsapp { background: var(--accent-green); color: white; }
+
+        /* Play Store Banner Button */
+        .app-download-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: #000;
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 12px;
+            border: 1px solid #444;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .app-download-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            border-color: #666;
+        }
+        .play-icon { font-size: 2rem; color: #00e676; }
+        .play-texts { text-align: left; line-height: 1.2; }
+        .play-sub { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; color: #bbb; display: block; }
+        .play-title { font-size: 1.1rem; font-weight: 700; color: #fff; display: block; }
 
         .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
         .section-title { text-align: center; margin-bottom: 25px; }
@@ -210,15 +252,32 @@
             <li><a href="#menu">Menu</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#branches">Branches</a></li>
+            <li>
+                <a href="https://play.google.com/store/apps/details?id=com.cafetalab.app" target="_blank" class="nav-app-btn">
+                    <i class="fab fa-google-play"></i> Get App
+                </a>
+            </li>
         </ul>
     </header>
 
     <section class="hero">
         <h1>Welcome to Cafe Talab</h1>
         <p>Fresh Pizzas, Juicy Burgers, Crispy Momos & Cool Mocktails in Vasai & Nallasopara!</p>
+        
         <div class="hero-actions">
             <a href="tel:9322653045" class="btn-action btn-call"><i class="fas fa-phone-alt"></i> Call Vasai</a>
             <a href="tel:9185053045" class="btn-action btn-call"><i class="fas fa-phone-alt"></i> Call Nallasopara</a>
+        </div>
+
+        <!-- Google Play Store Direct Redirect Button -->
+        <div>
+            <a href="https://play.google.com/store/apps/details?id=com.cafetalab.app" target="_blank" class="app-download-box">
+                <i class="fab fa-google-play play-icon"></i>
+                <div class="play-texts">
+                    <span class="play-sub">GET IT ON</span>
+                    <span class="play-title">Google Play</span>
+                </div>
+            </a>
         </div>
     </section>
 
